@@ -9,42 +9,47 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var count = 0
-    @State private var input = ""
-    
-    
-    let options = ["yes", "no", "maybe"]
-    
-    @State private var choice = "yes"
+    var todos: [Todo] = testData
     
     var body: some View {
         
-        Section {
-            Form {
-                Button("Click Here!") {
-                    self.count += 1
+        VStack {
+            HStack {
+                Button("<") {
+                    
                 }
+                .padding()
                 
-                Text(String(count))
+                Spacer()
                 
-                TextField("Enter your input: ", text: $input)
+                Text("today")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                 
-                Text(input)
+                Spacer()
+                
+                Button(">") {
+                    
+                }
+                .padding()
             }
-        }
-        
-        Section {
-            Form {
-                Picker("Yes or no?", selection: $choice) {
-                    ForEach(options, id: \.self) {
-                        Text($0)
+            .padding()
+            
+            NavigationView {
+                Text("calendar events here")
+            }
+            
+            NavigationView {
+                List(todos) { Todo in
+                    NavigationLink(destination: Text("scheduling UI here")) {
+                        Text(Todo.title)
                     }
+                    
                 }
-                
-                Text(choice)
             }
         }
         
+    
         
     }
 }
